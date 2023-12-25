@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import { restrauntList } from "./restrauntList";
 import RestaurantCard from "./RestaurantCard";
 import Shimmer from "./Shimmer";
- 
-
+  
 function filterData(searchText, restaurants) {
   const filterData = restaurants.filter((res) =>
-    res?.data?.name?.toLowerCase().includes(searchText.toLowerCase())
+    res?.title?.toLowerCase().includes(searchText.toLowerCase())
   );
   return filterData;
 }
@@ -23,21 +22,12 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.5204303&lng=73.8567437&page_type=DESKTOP_WEB_LISTING"
-    );
-    const json = await data.json();
-    const details = Object.values(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    console.log(details[0].info.name);
+    const data = await fetch("https://fakestoreapi.com/products");
+    const jsonData = await data.json(); 
+    console.log(jsonData);
     //opetional chaning
-    setAllRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
-    setFilteredRestaurants(
-      json?.data?.cards[5]?.card?.card?.gridElements?.infoWithStyle?.restaurants
-    );
+    setAllRestaurants(jsonData);
+    setFilteredRestaurants(jsonData);
   }
   if (!allRestaurants) return null; // not render component (Early return) // or do optional chaning insteed of this
 
@@ -62,14 +52,14 @@ const Body = () => {
           onClick={() => {
             //need to filter the data
             const data = filterData(searchText, allRestaurants);
-            filteredRestaurants(data);
+              setFilteredRestaurants(data);
             //
           }}
         >
           Search
         </button>
       </div>
-      <div className="resturant-list">
+        <div className="resturant-list">
         {/* <RestrauntCard
         cloudinaryImageId={restrauntList[0].data.cloudinaryImageId}
         name={restrauntList[0].data.name}
@@ -79,7 +69,7 @@ const Body = () => {
         {/* <RestrauntCard {...restrauntList[0].data} />  */}
         {/*  you can you for loop here but its better use the map method  */}
         {filteredRestaurants.map((restaurant) => {
-          return <RestaurantCard {...restaurant.data} />;
+          return <RestaurantCard key={restaurant.id} {...restaurant} />;
         })}
       </div>
     </>

@@ -34,16 +34,14 @@ body{
 .card > img{
     width:100%;  
 }
+.restaurants-list{
+    display: flex;
+    flex-wrap: wrap;
+}
 .resturant-list{
     display: flex;
     flex-wrap: wrap;
 }
-
-.restaurant-list{
-    display: flex;
-    flex-wrap: wrap;
-}
-
 .shimmer-card{
     width: 200px;
     height: 200px;
