@@ -38,7 +38,7 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
-.resturant-list{
+.restaurant-list{
     display: flex;
     flex-wrap: wrap;
 }
@@ -53,3 +53,4 @@ body{
     display: flex;
     flex-wrap: wrap;
 }
+ 

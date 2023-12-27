@@ -1,21 +1,17 @@
-import { IMG_CDN_URL } from "./contants"; 
+import { IMG_CDN_URL } from "../utils/contants";
 
-// everything we are building is a config driven UI (more dynamic)
-
-const RestaurantCard = ({
-   title,
-    price,
-    image,
-  categary
-}) => {
+const RestaurantCard = (props) => {
+  const { resData } = props;
+  const { name, cloudinaryImageId, cuisines, avgRating, costForTwo } =
+    resData.info;
   return (
     <div className="card">
-      <img src={image} />
-      <h2>{title}</h2>
-      <h3>{categary}</h3>
-      <h4>{price}</h4>
+      <img src={IMG_CDN_URL + cloudinaryImageId} />
+      <h2>{name}</h2>
+      <h3>{cuisines}</h3>
+      <h4>{costForTwo}</h4>
+      <h4>{avgRating} stars </h4>
     </div>
   );
 };
-
 export default RestaurantCard;
