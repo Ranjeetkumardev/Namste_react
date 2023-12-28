@@ -2,30 +2,45 @@ import { useParams } from "react-router-dom";
 import Shimmer from "./Shimmer";
 import useRestaurant from "../utils/useRestaurant";
 import { IMG_CDN_URL } from './../utils/contants';
+import RestoCategory from "./RestoCategory";
+import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
   const restoMenu = useRestaurant(resId);
+ const [showIndex ,setshowIndex] = useState(null)
+
   if (restoMenu === null) return <Shimmer />;
   const { name, cloudinaryImageId, cuisines, avgRating, costForTwo } =
     restoMenu?.cards[0]?.card?.card?.info;
 
-  const { itemCards } =
-    restoMenu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card
-      ?.card;
-  console.log(itemCards);
+  const categories =
+    restoMenu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+      (c) =>
+        c.card?.card?.["@type"] ===
+        "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+    );
+  //console.log(categories);
   return (
     <div className="restoMenu">
-      <div>
-        <h1>{name}</h1>
+      <div className="text-center">
+        <h1 className="font-bold my-3 text-2xl">{name}</h1>
         <img src={IMG_CDN_URL + cloudinaryImageId} />
-        <h4>
+        <p className="font-bold text-lg">
           {cuisines.join(",")} - {costForTwo / 100}
-        </h4>
-
-        <h3>{avgRating} stars</h3>
+        </p>
+        <p className="font-medium">{avgRating} stars</p>
+        {/* categories accordian */}
+        {categories.map((category ,index) => (
+          <RestoCategory
+          key={category?.card?.card.title} 
+            cardData={category?.card?.card}
+            showItem={index===showIndex ? true : false}
+            setshowIndex={()=>setshowIndex(index)}
+          />
+        ))}
       </div>
-      <div>
+      {/* <div>
         <h1>MENU</h1>
         <ul>
           {Object.values(itemCards).map((items) => (
@@ -36,7 +51,7 @@ const RestaurantMenu = () => {
             </li>
           ))}
         </ul>
-      </div>
+      </div> */}
     </div>
   );
 };

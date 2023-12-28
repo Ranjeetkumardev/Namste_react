@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard ,{withPromotedLabel} from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -7,7 +7,8 @@ import useOnline from "../utils/useOnline";
 
 const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [allRestaurants, setAllRestaurants] = useState([]);
+  const [allRestaurants, setAllRestaurants] = useState([]); 
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard)
   // searchText is a local state variable for searching in input box
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
@@ -18,7 +19,7 @@ const Body = () => {
     const data = await fetch(
       "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.7169176&lng=76.653628&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
     );
-      const json = await data.json();
+    const json = await data.json();
     // console.log(
     //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     // );
@@ -43,16 +44,16 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search-container">
+      <div className="search m-2 p-2">
         <input
           type="text"
-          className="search-input"
-          placeholder="Search"
+          className="border-solid border-2 rounded-sm border-black"
+          placeholder="  Search"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button
-          className="search-btn"
+          className="px-4 m-4 rounded-sm bg-green-100"
           onClick={() => {
             // need to filter the data
             // need to update the restaurants
@@ -63,14 +64,18 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="restaurant-list">
+      <div className="flex flex-wrap text-wrap">
         {filteredRestaurants?.map((restaurant) => {
           return (
             <Link
               to={"/restaurant/" + restaurant.info.id}
               key={restaurant.info.id}
             >
-              <RestaurantCard resData={restaurant} />
+              {restaurant.info.avgRating > 4 ? (
+                <RestaurantCardPromoted resData={restaurant} />
+              ) : (
+                <RestaurantCard resData={restaurant} />
+              )}
             </Link>
           );
         })}

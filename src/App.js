@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy ,Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./Components/Header";
 import Body from "./Components/Body";
@@ -9,7 +9,7 @@ import Errors from "./Components/Errors";
 import Contact from "./Components/Contact";
 import { Outlet } from "react-router-dom"; //this Outlet is component and it will filled by the children route
 import RestaurantMenu from "./Components/RestaurantMenu";
-import InstaMart from "./Components/instaMart";
+import Shimmer from "./Components/Shimmer";
 /**
  *
  * Header
@@ -27,13 +27,35 @@ import InstaMart from "./Components/instaMart";
  *  Copyright
  */
 
-const AppLayout = () => {
+/**
+ *Chunking 
+ * Code Spiliting 
+ * Dynamic Bulding 
+ * Lazy Loading 
+ * on Demand Loading 
+ */
+
+ const InstaMart = lazy(() => import("./Components/instaMart"));
+import Shimmer from './Components/Shimmer';
+import UserContext from "./utils/UserContext";
+
+const AppLayout = () => { 
+  const [UserName , setUserName] = useState()
+  useEffect(() => {
+    const Userdata = {
+      name: "Kumar Dev"
+    };
+    setUserName(Userdata)
+  })
+
   return (
-    <>
-      <Header />
-      <Outlet />
-      <Footer />
-    </>
+    <UserContext.Provider value={{ loddedInUser: UserName }}>
+      <div className="app">
+        <Header />
+        <Outlet />
+        <Footer />
+      </div>
+    </UserContext.Provider>
   );
 };
 // if you want nested route you have to create the children
@@ -57,7 +79,11 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/instamart",
-        element: <InstaMart />,
+        element: (
+          <Suspense fallback={<Shimmer />}>
+            <InstaMart />
+          </Suspense>
+        ),
       },
       {
         // Dynamic segments /routing
