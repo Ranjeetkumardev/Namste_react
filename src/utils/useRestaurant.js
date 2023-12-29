@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { FETCH_MENU_URL } from "./contants"; 
+import { FETCH_MENU_URL } from "./constrants";
 
-// this is a custome Hooks 
+// this is a custome Hooks
 const useRestaurant = (resId) => {
   const [restoMenu, setRestoMenu] = useState(null);
 
@@ -17,4 +17,4 @@ const useRestaurant = (resId) => {
   return restoMenu;
 };
 
-export default useRestaurant
+export default useRestaurant;

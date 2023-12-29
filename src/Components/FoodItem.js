@@ -1,4 +1,4 @@
-import { IMG_CDN_URL } from "../utils/contants";
+import { IMG_CDN_URL } from "../utils/constrants";
 
 const FoodItem = ({ name, description, imageId, price }) => {
   //console.log(name)
