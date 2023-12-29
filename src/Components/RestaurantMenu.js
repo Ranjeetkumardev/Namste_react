@@ -40,7 +40,7 @@ const RestaurantMenu = () => {
           />
         ))}
       </div>
-      {/* <div>
+       {/* <div>
         <h1>MENU</h1>
         <ul>
           {Object.values(itemCards).map((items) => (
@@ -51,7 +51,7 @@ const RestaurantMenu = () => {
             </li>
           ))}
         </ul>
-      </div> */}
+      </div>  */}
     </div>
   );
 };

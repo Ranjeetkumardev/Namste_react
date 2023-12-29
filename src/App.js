@@ -1,4 +1,4 @@
-import React, { lazy ,Suspense, useEffect, useState } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./Components/Header";
 import Body from "./Components/Body";
@@ -10,6 +10,8 @@ import Contact from "./Components/Contact";
 import { Outlet } from "react-router-dom"; //this Outlet is component and it will filled by the children route
 import RestaurantMenu from "./Components/RestaurantMenu";
 import Shimmer from "./Components/Shimmer";
+//import UserContext from "./utils/UserContext";
+
 /**
  *
  * Header
@@ -28,34 +30,37 @@ import Shimmer from "./Components/Shimmer";
  */
 
 /**
- *Chunking 
- * Code Spiliting 
- * Dynamic Bulding 
- * Lazy Loading 
- * on Demand Loading 
+ *Chunking
+ * Code Spiliting
+ * Dynamic Bulding
+ * Lazy Loading
+ * on Demand Loading
  */
 
- const InstaMart = lazy(() => import("./Components/instaMart"));
-import Shimmer from './Components/Shimmer';
-import UserContext from "./utils/UserContext";
-
-const AppLayout = () => { 
-  const [UserName , setUserName] = useState()
+const InstaMart = lazy(() => import("./Components/instaMart"));
+import Shimmer from "./Components/Shimmer";
+import { Provider } from "react-redux";
+import appStore from "./utils/appStore";
+import Cart from "./Components/cart";
+const AppLayout = () => {
+  const [userName, setUserName] = useState();
+   
   useEffect(() => {
     const Userdata = {
-      name: "Kumar Dev"
+      name: "Kumar Dev",
     };
-    setUserName(Userdata)
-  })
+    setUserName(Userdata);
+  } ,[]);
 
   return (
-    <UserContext.Provider value={{ loddedInUser: UserName }}>
-      <div className="app">
+      <Provider store={appStore}>
+    <div className="app">
+      {/* <UserContext.Provider value={{loggedInUser :userName}}></UserContext.Provider> */}
         <Header />
         <Outlet />
         <Footer />
-      </div>
-    </UserContext.Provider>
+    </div>
+      </Provider>
   );
 };
 // if you want nested route you have to create the children
@@ -84,6 +89,10 @@ const appRouter = createBrowserRouter([
             <InstaMart />
           </Suspense>
         ),
+      },
+      {
+        path: "/cart",
+        element: <Cart/>,
       },
       {
         // Dynamic segments /routing
