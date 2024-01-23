@@ -22,10 +22,12 @@ const RestaurantMenu = () => {
     );
   //console.log(categories);
   return (
-    <div className="restoMenu">
-      <div className="text-center">
-        <h1 className="font-bold my-3 text-2xl">{name}</h1>
-        <img src={IMG_CDN_URL + cloudinaryImageId} />
+    <div className="w-full flex">
+      <div className="mt-5 ml-5 -mr-10">
+        <img className="w-[320]" src={IMG_CDN_URL + cloudinaryImageId} />
+      </div>
+      <div className="text-center w-9/12">
+        <h1 className="font-bold my-3 text-2xl mt-5 ">{name}</h1>
         <p className="font-bold text-lg">
           {cuisines.join(",")} - {costForTwo / 100}
         </p>

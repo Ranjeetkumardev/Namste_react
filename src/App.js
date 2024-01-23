@@ -42,6 +42,7 @@ import Shimmer from "./Components/Shimmer";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./Components/cart";
+import Login from "./Components/login";
 const AppLayout = () => {
   const [userName, setUserName] = useState();
    
@@ -77,6 +78,10 @@ const appRouter = createBrowserRouter([
       {
         path: "/About",
         element: <About />,
+      },
+      {
+        path: "/login",
+        element: <Login/>,
       },
       {
         path: "/contact",

@@ -1,14 +1,15 @@
-import RestaurantCard ,{withPromotedLabel} from "./RestaurantCard";
+import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
+import {SWIGGY_API} from "../utils/constrants"
 
 const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [allRestaurants, setAllRestaurants] = useState([]); 
-  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard)
+  const [allRestaurants, setAllRestaurants] = useState([]);
+  const RestaurantCardPromoted = withPromotedLabel(RestaurantCard);
   // searchText is a local state variable for searching in input box
   const [searchText, setSearchText] = useState("");
   useEffect(() => {
@@ -16,19 +17,17 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(
-      "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.7169176&lng=76.653628&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING"
-    );
+    const data = await fetch(SWIGGY_API);
     const json = await data.json();
     // console.log(
     //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     // );
 
     setAllRestaurants(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestaurants(
-      json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
 
@@ -44,16 +43,16 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="search m-2 p-2">
+      <div className="h-10 flex justify-center mt-2">
         <input
           type="text"
-          className="border-solid border-2 rounded-sm border-black"
-          placeholder="  Search"
+          className=" border rounded-xl rounded-r-sm border-red-200 w-[320] "
+          placeholder=" Search a restaurent you want.."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button
-          className="px-4 m-4 rounded-sm bg-green-100"
+          className="px-4 bg-green-100 border rounded-xl rounded-l-sm border-red-300"
           onClick={() => {
             // need to filter the data
             // need to update the restaurants

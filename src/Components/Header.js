@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"; // link tag become anchor tag behind the scien becouse browser understand anchor tag 
 import { useState ,useContext } from "react";
-import Logo from "../assets/IMG/foodvilla.png"
+//import Logo from "../assets/IMG/foodvilla.png"
 import useOnline from "../utils/useOnline";
 import UserContext from "../utils/UserContext";
 import { useSelector } from "react-redux";
@@ -13,15 +13,19 @@ const Header = () => {
   //subscribing  to the store using sellector 
   const cartItems = useSelector((store)=>store.cart.items)
   return (
-    <div className="flex justify-between bg-pink-100 shadow-lg">
+    <div className="flex justify-between bg-pink-100 shadow-lg w-full sticky top-0 left-0 right-0 z-10 ">
       <div className="m-2">
         <Link to="/">
-          <img className="w-20 rounded-3xl" alt="logo" src={Logo} />
+          <img
+            className="w-20 rounded-xl m-2"
+            alt="logo"
+            src="https://cdn.pixabay.com/photo/2017/02/17/17/33/food-2074638_960_720.png"
+          />
         </Link>
       </div>
       <div className="flex items-center">
         <ul className="flex p-4 m-4">
-          <li className="px-4">Status:{isOnline ? "🟢" : "🔴"}</li>
+          <li className="px-4">{isOnline ? "Online:🟢" : "Ofline:🔴"}</li>
           <li className="px-4">
             <Link to="/">Home</Link>
           </li>
@@ -40,7 +44,10 @@ const Header = () => {
           <li className="px-4 font-medium text-xl">
             <Link to="/cart"> Cart- ({cartItems.length} items) </Link>
           </li>
-          <button
+          <li className="px-4 font-medium text-xl">
+            <Link to="/login">Login</Link>
+          </li>
+          {/* <button
             className="btn"
             onClick={() => {
               isLogedIn === "Login"
@@ -49,7 +56,7 @@ const Header = () => {
             }}
           >
             {isLogedIn}
-          </button>
+          </button> */}
           <li className="px-4 font-medium">{loggedInUser}</li>
         </ul>
       </div>

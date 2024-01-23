@@ -8,9 +8,12 @@ const RestoCategory = ({ cardData, showItem, setshowIndex }) => {
   };
 
   return (
-    <div className="text-center w-6/12 mx-auto my-4 p-4  bg-gray-50 shadow-lg ">
-      <div className="flex justify-between" onClick={handleClick}>
-        <span className="font-bold text-md">
+    <div className="text-center w-9/12 mx-auto my-4 p-4  bg-gray-50 shadow-lg ">
+      <div
+        className="flex justify-between cursor-pointer"
+        onClick={handleClick}
+      >
+        <span className="font-bold text-md ">
           {cardData.title} ({cardData.itemCards.length})
         </span>
         <span>⬇️</span>
