@@ -1,10 +1,11 @@
 import RestaurantCard, { withPromotedLabel } from "./RestaurantCard";
 import { useState, useEffect } from "react";
-import Shimmer from "./Shimmer";
+
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
-import {SWIGGY_API} from "../utils/constrants"
+import { SWIGGY_API } from "../utils/constrants";
+import Shimmer from "../utils/Shimmer";
 
 const Body = () => {
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
@@ -20,14 +21,14 @@ const Body = () => {
     const data = await fetch(SWIGGY_API);
     const json = await data.json();
     // console.log(
-    //   json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+    //   json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     // );
 
     setAllRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
     setFilteredRestaurants(
-      json?.data?.cards[2]?.card?.card?.gridElements?.infoWithStyle?.restaurants
+      json?.data?.cards[4]?.card?.card?.gridElements?.infoWithStyle?.restaurants
     );
   }
 
@@ -43,16 +44,16 @@ const Body = () => {
     <Shimmer />
   ) : (
     <>
-      <div className="h-10 flex justify-center mt-2">
+      <div className="h-10 flex justify-center mt-2 font-sans">
         <input
           type="text"
-          className=" border rounded-xl rounded-r-sm border-red-200 w-[320] "
-          placeholder=" Search a restaurent you want.."
+          className=" border rounded-l-3xl rounded-r-sm border-red-200 w-[320] p-3"
+          placeholder="Search a restaurent you want.."
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
         <button
-          className="px-4 bg-green-100 border rounded-xl rounded-l-sm border-red-300"
+          className="px-4 bg-green-100 border rounded-r-3xl rounded-l-sm border-red-300"
           onClick={() => {
             // need to filter the data
             // need to update the restaurants
@@ -63,7 +64,7 @@ const Body = () => {
           Search
         </button>
       </div>
-      <div className="flex flex-wrap text-wrap">
+      <div className="flex flex-wrap text-wrap ml-6">
         {filteredRestaurants?.map((restaurant) => {
           return (
             <Link

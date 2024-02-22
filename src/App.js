@@ -9,7 +9,7 @@ import Errors from "./Components/Errors";
 import Contact from "./Components/Contact";
 import { Outlet } from "react-router-dom"; //this Outlet is component and it will filled by the children route
 import RestaurantMenu from "./Components/RestaurantMenu";
-import Shimmer from "./Components/Shimmer";
+import Shimmer from "./utils/Shimmer";
 //import UserContext from "./utils/UserContext";
 
 /**
@@ -38,30 +38,30 @@ import Shimmer from "./Components/Shimmer";
  */
 
 const InstaMart = lazy(() => import("./Components/instaMart"));
-import Shimmer from "./Components/Shimmer";
+import Shimmer from "./utils/Shimmer";
 import { Provider } from "react-redux";
 import appStore from "./utils/appStore";
 import Cart from "./Components/cart";
 import Login from "./Components/login";
 const AppLayout = () => {
   const [userName, setUserName] = useState();
-   
+
   useEffect(() => {
     const Userdata = {
       name: "Kumar Dev",
     };
     setUserName(Userdata);
-  } ,[]);
+  }, []);
 
   return (
-      <Provider store={appStore}>
-    <div className="app">
-      {/* <UserContext.Provider value={{loggedInUser :userName}}></UserContext.Provider> */}
+    <Provider store={appStore}>
+      <div className="app">
+        {/* <UserContext.Provider value={{loggedInUser :userName}}></UserContext.Provider> */}
         <Header />
         <Outlet />
         <Footer />
-    </div>
-      </Provider>
+      </div>
+    </Provider>
   );
 };
 // if you want nested route you have to create the children
@@ -81,7 +81,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/login",
-        element: <Login/>,
+        element: <Login />,
       },
       {
         path: "/contact",
@@ -97,7 +97,7 @@ const appRouter = createBrowserRouter([
       },
       {
         path: "/cart",
-        element: <Cart/>,
+        element: <Cart />,
       },
       {
         // Dynamic segments /routing

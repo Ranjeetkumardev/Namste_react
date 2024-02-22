@@ -93,13 +93,13 @@ const Login = () => {
     <div>
       <div className="bg-black absolute -mt-48 -z-30">
         <img
-          className="w-screen opacity-75 "
+          className="w-screen h-full object-cover opacity-75 "
           src="https://thumbs.dreamstime.com/b/people-eating-heal…hy-meals-wooden-table-food-delivery-160387494.jpg"
         />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className=" w-3/12 p-12 mt-24 mx-auto right-0 left-0 bg-black text-white rounded-lg bg-opacity-80 z-50 "
+        className="w-8/12 md:w-3/12 p-12 mt-24 mx-auto right-0 left-0 bg-black text-white rounded-lg bg-opacity-80 z-50 "
       >
         <h1 className="font-bold text-2xl py-4">
           {isloggedIn ? "Sign In" : "Sign Up"}

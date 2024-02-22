@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import Shimmer from "./Shimmer";
+import Shimmer from "../utils/Shimmer";
 import useRestaurant from "../utils/useRestaurant";
 import { IMG_CDN_URL } from "../utils/constrants";
 import RestoCategory from "./RestoCategory";
@@ -7,15 +7,17 @@ import { useState } from "react";
 
 const RestaurantMenu = () => {
   const { resId } = useParams();
+  //console.log(resId);
   const restoMenu = useRestaurant(resId);
+ 
   const [showIndex, setshowIndex] = useState(null);
 
   if (restoMenu === null) return <Shimmer />;
+ 
   const { name, cloudinaryImageId, cuisines, avgRating, costForTwo } =
-    restoMenu?.cards[0]?.card?.card?.info;
-
+    restoMenu?.cards[2]?.card?.card?.info;  
   const categories =
-    restoMenu?.cards[2]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+    restoMenu?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
       (c) =>
         c.card?.card?.["@type"] ===
         "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
@@ -41,19 +43,19 @@ const RestaurantMenu = () => {
             setshowIndex={() => setshowIndex(index)}
           />
         ))}
-      </div>
+       </div>
       {/* <div>
-        <h1>MENU</h1>
-        <ul>
-          {Object.values(itemCards).map((items) => (
-            <li key={items?.card?.info?.id}>
-              {items?.card?.info?.name}-Rs:
-              {(items?.card?.info?.price || items?.card?.info?.defaultPrice) /
-                100}
-            </li>
-          ))}
-        </ul>
-      </div>  */}
+    //     <h1>MENU</h1>
+    //     <ul>
+    //       {Object.values(itemCards).map((items) => (
+    //         <li key={items?.card?.info?.id}>
+    //           {items?.card?.info?.name}-Rs:
+    //           {(items?.card?.info?.price || items?.card?.info?.defaultPrice) /
+    //             100}
+    //         </li>
+    //       ))}
+    //     </ul>
+    //   </div>  */}
     </div>
   );
 };

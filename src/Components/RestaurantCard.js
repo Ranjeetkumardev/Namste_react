@@ -1,7 +1,7 @@
 import { IMG_CDN_URL } from "../utils/constrants";
 
 const RestaurantCard = (props) => {
-  const {info} = props.resData; ;
+  const { info } = props.resData; 
   const { name, cloudinaryImageId, cuisines, avgRating, costForTwo } =info;
   return (
     <div className="m-3 p-4 w-[225] h-[310] bg-gray-100 truncate rounded-lg">
