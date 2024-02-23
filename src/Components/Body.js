@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { filterData } from "../utils/helper";
 import useOnline from "../utils/useOnline";
-import { SWIGGY_API } from "../utils/constrants";
+import { SWIGGY_API_DATA } from "../utils/constrants";
 import Shimmer from "../utils/Shimmer";
 
 const Body = () => {
@@ -18,7 +18,7 @@ const Body = () => {
   }, []);
 
   async function getRestaurants() {
-    const data = await fetch(SWIGGY_API);
+    const data = await fetch(SWIGGY_API_DATA);
     const json = await data.json();
     // console.log(
     //   json?.data?.cards[3]?.card?.card?.gridElements?.infoWithStyle?.restaurants

@@ -614,7 +614,7 @@ export const restrauntList = [
   },
 ];
 
-export const SWIGGY_API =
+export const SWIGGY_API_DATA =
   "https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.00480&lng=75.94630&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const Header_Logo =
