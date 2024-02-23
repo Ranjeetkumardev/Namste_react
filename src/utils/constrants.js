@@ -615,7 +615,7 @@ export const restrauntList = [
 ];
 
 export const SWIGGY_API =
-  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=30.7169176&lng=76.653628&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+  "https://www.swiggy.com/dapi/restaurants/list/v5?lat=31.00480&lng=75.94630&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
 export const Header_Logo =
   "https://encrypted-tbn0.gstatic.com/images?q=tbn:AN…tT_wjHSK-890Q2Oa4FXD7YOiMmZQ5KJSRVT94o3M&usqp=CAU";
